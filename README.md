@@ -1,4 +1,4 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-'app.js' was modified to create enemy objects using pseudo-classical pattern. And player object was created using pseudo-subclassical pattern. 'engine.js' was modified to gain more game control and detect collision and success of the game.
+An arcade game inside browser. To play, open index.html in a browser. Use arrows buttons on the keyboard to control the movements of the character. The goal is to reach the river without hitting the bugs. Enjoy!
