@@ -28,6 +28,14 @@ var Engine = (function(global) {
     canvas.width = 505;
     canvas.height = 606;
     doc.body.appendChild(canvas);
+    ctx.fillStyle = '#993300';
+    ctx.font = '42pt Courier New';
+    ctx.lineWidth = 3;
+    ctx.textAlign = 'center';
+
+    // variable for displaying 80 frames of text
+    var textDisplay = 0;
+    var success = true;
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -45,8 +53,27 @@ var Engine = (function(global) {
         /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
          */
-        update(dt);
+        var result = update(dt);
         render();
+
+        if(result !== 0) {
+            player.render();
+            player.reset();
+            textDisplay = 80;
+            if(result ===1)
+                success = true;
+            else
+                success = false;
+        }
+        if(textDisplay > 0 && success == true) {
+            ctx.fillText("You Win!", canvas.width/2, 280);
+            textDisplay--;
+        }
+        if(textDisplay > 0 && success == false) {
+            ctx.fillText("Game Over!", canvas.width/2, 280);
+            textDisplay--;
+        }
+        
 
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
@@ -79,7 +106,7 @@ var Engine = (function(global) {
      * on the entities themselves within your app.js file).
      */
     function update(dt) {
-        updateEntities(dt);
+        return updateEntities(dt);
         // checkCollisions();
     }
 
@@ -94,7 +121,8 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        player.update();
+
+        return player.update();
     }
 
     /* This function initially draws the "game level", it will then call
