@@ -65,11 +65,11 @@ var Engine = (function(global) {
             else
                 success = false;
         }
-        if(textDisplay > 0 && success == true) {
+        if(textDisplay > 0 && success === true) {
             ctx.fillText("You Win!", canvas.width/2, 280);
             textDisplay--;
         }
-        if(textDisplay > 0 && success == false) {
+        if(textDisplay > 0 && success === false) {
             ctx.fillText("Game Over!", canvas.width/2, 280);
             textDisplay--;
         }
@@ -84,7 +84,7 @@ var Engine = (function(global) {
          * function again as soon as the browser is able to draw another frame.
          */
         win.requestAnimationFrame(main);
-    };
+    }
 
     /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the

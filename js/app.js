@@ -1,7 +1,7 @@
 // Global function generating a number
 var numGen = function(base, range){
     return base + Math.floor(Math.random()*range);
-}
+};
 // Circular array
 var newY = [1, 2, 0];
 // Enemies our player must avoid
@@ -16,7 +16,7 @@ var Enemy = function() {
     this.x = -600 + 300 * numGen(0, 3);
     this.y = 60 + 83 * numGen(0, 3);
     this.velocity = 20 + 30 * numGen(0, 10);
-}
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -30,12 +30,12 @@ Enemy.prototype.update = function(dt) {
         var temp = (this.y - 60)/83;
         this.y = 60 + 83*newY[temp];
     }
-}
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -46,7 +46,7 @@ var Player = function(){
     // initial locations
     this.x = 101 * 2;
     this.y = 321 + 83 * 1;
-}
+};
 Player.prototype = Object.create(Enemy.prototype);
 Player.prototype.constructor = Player;
 Player.prototype.handleInput = function(key){
@@ -63,16 +63,16 @@ Player.prototype.handleInput = function(key){
         if(this.y < 404)
             this.y += 83;
     }
-}
+};
 Player.prototype.reset = function(){
     this.x = 101 * 2;
     this.y = 321 + 83 * 1;
-}
+};
 Player.prototype.update = function(){
     // gameStatus variable to denote current state
     var gameStatus = 0;
     var rowY = (this.y - 72)/83;
-    for(var i = 0; i < allEnemies.length; i++) {
+    for(var i = 0, len = allEnemies.length; i < len; i++) {
         var enemyY = (allEnemies[i].y - 60)/83;
         if(rowY === enemyY){
             if(this.x > allEnemies[i].x - 50 && this.x < allEnemies[i].x + 80){
@@ -83,7 +83,7 @@ Player.prototype.update = function(){
     if(rowY < 0)
         gameStatus = 1;
     return gameStatus;
-}
+};
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
